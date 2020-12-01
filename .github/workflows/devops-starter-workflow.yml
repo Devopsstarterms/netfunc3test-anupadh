@@ -49,6 +49,12 @@ jobs:
         pushd ${{ env.APPLICATIONPATH }}
         msbuild .\SampleFunctionApp.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl="./compilationartifact"
         popd
+        
+    - name: Run unit tests with vstestConsole
+      run: |
+        pushd ${{ env.APPLICATIONPATH }}
+        vstest.console.exe SampleFunctionApp.Test\bin\Debug\netcoreapp2.1\SampleFunctionApp.Test.dll
+        podd
  
     - name: Run unit tests
       run: | 
